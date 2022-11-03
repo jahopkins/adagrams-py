@@ -41,15 +41,20 @@ def draw_letters():
 
         if ten_rand_letters.count(random_letter) < letter_distribution[random_letter]:
             ten_rand_letters.append(random_letter)
+    
     return ten_rand_letters
         
-
-
-
     #return array of 10 letters
 
 def uses_available_letters(word, letter_bank):
-    pass
+
+    upper_word = word.upper()
+    for letter in upper_word:
+        if letter not in letter_bank or letter_bank.count(letter) < upper_word.count(letter):
+            return False
+        else:
+            continue
+    return True
 
 def score_word(word):
     pass
