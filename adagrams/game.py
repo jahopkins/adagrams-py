@@ -1,7 +1,6 @@
 import random
 
 def draw_letters():
-    # create data structure to store letters
 
     letter_distribution = {
     'A': 9, 
@@ -31,24 +30,19 @@ def draw_letters():
     'Y': 2, 
     'Z': 1
 }
-
-    # select a random letter 
-
     ten_rand_letters = []
 
     while len(ten_rand_letters) < 10:
-        random_letter =random.choice(list(letter_distribution.keys()))
-
+        random_letter =random.choice(list(letter_distribution.keys()))   
+        
         if ten_rand_letters.count(random_letter) < letter_distribution[random_letter]:
             ten_rand_letters.append(random_letter)
-    
     return ten_rand_letters
-        
-    #return array of 10 letters
 
 def uses_available_letters(word, letter_bank):
 
     upper_word = word.upper()
+    
     for letter in upper_word:
         if letter not in letter_bank or letter_bank.count(letter) < upper_word.count(letter):
             return False
@@ -57,9 +51,8 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    # create initializer for score
+
     score = 0
-    # store values for each letter
     letter_values = {
             ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T") : 1, 
             ("D", "G") : 2,
@@ -69,20 +62,38 @@ def score_word(word):
             ("J", "X") : 8,
             ("Q", "Z") : 10
             }
-    # iterate through word to find the score for each word
-    upper_word = word.upper()
     
+    upper_word = word.upper()
     for letter in upper_word:
         for key in letter_values.keys():
             if letter in key:
                 score += letter_values[key]
-    
+
     if 7 <= len(word) <= 10:
         score += 8
     
     return score
 
-    # check length of word, if it is between 7 and 10 then add 8 points
-
 def get_highest_word_score(word_list):
-    pass
+    
+    highest_scoring_word = word_list[0]
+    highest_score = score_word(highest_scoring_word)
+    
+    for word in word_list:
+        word_score = score_word(word)
+        if word_score < highest_score:
+            continue
+        elif word_score > highest_score:
+            highest_scoring_word = word
+            highest_score = word_score
+        elif word_score == highest_score and len(highest_scoring_word) != len(word):
+            if len(highest_scoring_word) == 10:
+                continue
+            elif len(word) == 10:
+                highest_scoring_word = word
+                highest_score = word_score
+            elif len(word) < len(highest_scoring_word):
+                highest_scoring_word = word
+                highest_score = word_score
+
+    return (highest_scoring_word, highest_score)
