@@ -57,7 +57,32 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    pass
+    # create initializer for score
+    score = 0
+    # store values for each letter
+    letter_values = {
+            ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T") : 1, 
+            ("D", "G") : 2,
+            ("B", "C", "M", "P") : 3,
+            ("F", "H", "V", "W", "Y") :4,
+            ("K") : 5,
+            ("J", "X") : 8,
+            ("Q", "Z") : 10
+            }
+    # iterate through word to find the score for each word
+    upper_word = word.upper()
+    
+    for letter in upper_word:
+        for key in letter_values.keys():
+            if letter in key:
+                score += letter_values[key]
+    
+    if 7 <= len(word) <= 10:
+        score += 8
+    
+    return score
+
+    # check length of word, if it is between 7 and 10 then add 8 points
 
 def get_highest_word_score(word_list):
     pass
