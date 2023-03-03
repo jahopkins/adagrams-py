@@ -103,5 +103,3 @@ if __name__ == "__main__":
         wave = "ERROR"
     main(wave)
 
-# adding this comment to practice branching
-# second branch 
